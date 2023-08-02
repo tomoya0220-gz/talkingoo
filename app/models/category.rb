@@ -1,4 +1,6 @@
 class Category < ApplicationRecord
+    validates:name,presence:true
+
     Category.create(category:"仕事")
     Category.create(category:"人間関係")
     Category.create(category:"趣味")
