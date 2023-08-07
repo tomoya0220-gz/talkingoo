@@ -1,4 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
-    "/js/bootstrap.js": "/js/bootstrap.js"
+    "/js/bootstrap.js": "/js/bootstrap.js",
+    "/js/turbo.js": "/js/turbo.js",
+    "/js/app/actioncable.js": "/js/app/actioncable.js"
 }
