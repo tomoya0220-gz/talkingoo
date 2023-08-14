@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
     def new
-        @post = Post.new
+        @post = Post.new        
+        @category = Category.all
         render :new
     end
     def index
@@ -15,9 +16,12 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.new(post_params)
+        user = current_user
+        @post.user_id = user.id
         if params[:post][:image]
             @post.image.attach(params[:post][:image])
         end
+        
         if @post.save
             redirect_to index_post_path, notice: '登録しました'
         else
@@ -33,12 +37,12 @@ class PostsController < ApplicationController
     def update
         @post = Post.find(params[:id])
         if params[:post][:image]
-          @post.image.attach(params[:post][:image])
+            @post.image.attach(params[:post][:image])
         end
         if @post.update(post_params)
-          redirect_to index_post_path, notice: '更新しました'
+            redirect_to index_post_path, notice: '更新しました'
         else
-          render :edit, status: :unprocessable_entity
+            render :edit, status: :unprocessable_entity
         end
     end
 
@@ -50,6 +54,6 @@ class PostsController < ApplicationController
     
     private
     def post_params
-        params.require(:post).permit(:title, :body, :image)
+        params.require(:post).permit(:title, :content, :category_id, :image)
     end
 end

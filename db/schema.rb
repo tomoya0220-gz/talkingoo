@@ -65,10 +65,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_130643) do
   end
 
   create_table "user_profiles", charset: "utf8mb4", collation: "utf8mb4_0900_bin", force: :cascade do |t|
-    t.string "name"
-    t.integer "user_id"
+    t.string "name", comment: "名前/ニックネーム"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_bin", force: :cascade do |t|
@@ -88,4 +89,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_07_130643) do
   add_foreign_key "comments", "posts"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
+  add_foreign_key "user_profiles", "users"
 end

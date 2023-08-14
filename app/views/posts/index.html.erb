@@ -7,13 +7,13 @@
 
 <div class="post-list">
   <% @posts.each do |post| %>
-    <a class="post" href="<%= edit_comment_path(post) %>">
+    <a class="post" href="">
       <div class="header">
         <h2 class="title"><%= post.title %></h2>
         <p class="timestamp"><%= post.created_at.strftime("%B %d, %Y") %></p>
       </div>
       <div class="body">
-        <p class="content"><%= post.body %></p>
+        <p class="content"><%= post.content %></p>
       </div>
       <div class="image">
         <%= image_tag(post.image) if post.image.attached? %>
