@@ -10,6 +10,12 @@ Rails.application.routes.draw do
   delete 'posts/destroy/:id', to: 'posts#destroy', as: 'destroy_post'
   get 'posts/show/:post_id/comments/new', to: 'comments#new', as: 'new_comment'
   post 'posts/show/:post_id/comments/new', to: 'comments#create', as: 'create_comment'
+  #ユーザープロフィール
+  #登録・更新
+  get 'profiles/new',to: 'profiles#new', as: 'new_profiles'
+  post 'profiles/new',to: 'profiles#create',as: 'create_profiles'
+
+  
 
   #TopicsController
   get 'topics/new', to: 'topics#new', as:'new_topics'
