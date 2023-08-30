@@ -1,66 +1,73 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <!-- title -->
-  <title>SNS App</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <!-- Style -->
-  <link rel="stylesheet" href="<%= mix('/css/app.css') %>">
-  <!-- Javascript -->
-  <script src="<%= mix('/js/bootstrap.js') %>"></script>
-  <!-- turbo.jsを追加します -->
-  <script src="<%= mix('/js/turbo.js') %>"></script>
-</head>
-
-<body>
-  <div class="main-container">
-    <!--  ナビゲーションバー -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">検索</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">投稿</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">通知</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">プロフィール</a>
-            </li>
-          </ul>
-          <span class="navbar-text">
-            Navbar text with an inline element
-          </span>
+  <head>
+    <!-- title -->
+    <title>SNS App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <!-- Style -->
+    <link rel="stylesheet" href="<%= mix('/css/app.css') %>">
+    <!-- Javascript -->
+    <script src="<%= mix('/js/bootstrap.js') %>"></script>
+    <!-- turbo.jsを追加します -->
+    <script src="<%= mix('/js/turbo.js') %>"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <!--  ナビゲーションバー -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Home</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">検索</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">投稿</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">通知</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">プロフィール</a>
+              </li>
+            </ul>
+            <span class="navbar-text">
+              Navbar text with an inline element
+            </span>
+        </div>
       </div>
-  </div>
-</nav>
-    <!-- アラートメッセージ -->
+    </nav>
+      <!-- アラートメッセージ -->
     <% if notice %>
       <div class="alert alert-success" role="alert">
-        <%= notice %>
+          <%= notice %>
       </div>
     <% end %>
     <% if alert %>
       <div class="alert alert-danger" role="alert">
-        <%= alert %>
+          <%= alert %>
       </div>
     <% end %>
-
     <div class="bg-white text-dark">
       <%= yield %>
     </div>
-  </div>
-  <!-- Javascript -->
-  <script src="<%= mix('/js/app.js') %>"></script>
-</body>
+    <!-- 未確認の通知があるときは、黄色いマークで知らせる -->
+    <!-- ログインユーザーがいないと作動できないように -->
+    <% if current_user %>
+      <% if unchecked_notifications.any? %>
+        <i class="fa fa-circle" style="color: gold;"></i>
+      <% end %>
+    <% end %>
+    <li>
+      <%= link_to index_notifications_path,"NOTICE", class: "btn-default" %>
+    </li>
+    <!-- Javascript -->
+    <script src="<%= mix('/js/app.js') %>"></script>
+  </body>
 </html>

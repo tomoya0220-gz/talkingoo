@@ -10,11 +10,19 @@ Rails.application.routes.draw do
   delete 'posts/destroy/:id', to: 'posts#destroy', as: 'destroy_post'
   get 'posts/show/:post_id/comments/new', to: 'comments#new', as: 'new_comment'
   post 'posts/show/:post_id/comments/new', to: 'comments#create', as: 'create_comment'
-  #ユーザープロフィール
+  #ユーザープロフィール/フォロー時のプロフィール詳細画面
+  get 'user_profiles/:user_id', to:'user_profiles#show', as:'show_user_profile'
   #登録・更新
   get 'profiles/new',to: 'profiles#new', as: 'new_profiles'
   post 'profiles/new',to: 'profiles#create',as: 'create_profiles'
-
+  #通知
+  get 'notifications/index',to: 'notifications#index', as: 'index_notifications'
+  #通知画面から返信のあった投稿へアクセスできるように
+  # post 'notifications/new',to: ''
+  
+  
+  #削除
+  delete 'notifications/destroy', to: 'notifications#destroy_all', as: 'destroy_all_users_notifications'
   
 
   #TopicsController

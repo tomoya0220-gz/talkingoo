@@ -9,18 +9,23 @@ class ProfilesController < ApplicationController
     end
 
     def create 
-        @user_profile = UserProfile.new(user_profile_params)
+        @user_profile = UserProfile.new(user_profiles_params)
         @user = current_user
         @user_profile.user_id = @user.id
-        if params[:name][:image]
-            @user_profile.image.attach(params[:name][:image])
+        if params[:user_profile][:image]
+            @user_profile.image.attach(params[:user_profile][:image])
         end
         
         if @user_profile.save
-            redirect_to index_posts_path, notice: '登録しました'
+            redirect_to index_post_path,notice: 'プロフィール登録・更新しました'
         else
             render :new, status: :unprocessable_entity
         end
+    end
+
+    private
+    def user_profiles_params
+        params.require(:user_profile).permit(:name, :image, :introduction)
     end
 end
 

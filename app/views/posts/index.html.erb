@@ -7,6 +7,10 @@
 
 <div class="post-list">
   <% @posts.each do |post| %>
+    
+    <div>
+      <%= link_to post.user.user_profile.name,show_user_profile_path(post.user_id)%>
+    </div>
     <a class="post" href="">
       <div class="header">
         <h2 class="title"><%= post.title %></h2>
