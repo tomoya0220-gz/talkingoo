@@ -10,15 +10,18 @@ Rails.application.routes.draw do
   delete 'posts/destroy/:id', to: 'posts#destroy', as: 'destroy_post'
   get 'posts/show/:post_id/comments/new', to: 'comments#new', as: 'new_comment'
   post 'posts/show/:post_id/comments/new', to: 'comments#create', as: 'create_comment'
-  #ユーザープロフィール/フォロー時のプロフィール詳細画面
-  get 'user_profiles/:user_id', to:'user_profiles#show', as:'show_user_profile'
-  #登録・更新
+  #プロフィール登録・更新
   get 'profiles/new',to: 'profiles#new', as: 'new_profiles'
   post 'profiles/new',to: 'profiles#create',as: 'create_profiles'
+  
+  #プロフィール詳細画面へ
+  get 'profiles/show/:user_id',to: 'profiles#show', as: 'show_profile'
+  #プロフィール詳細画面でのフォロー
+  post 'profiles/show/:user_id',to: 'profiles#follow', as: 'follow_profile' 
+  
   #通知
   get 'notifications/index',to: 'notifications#index', as: 'index_notifications'
-  #通知画面から返信のあった投稿へアクセスできるように
-  # post 'notifications/new',to: ''
+  
   
   
   #削除

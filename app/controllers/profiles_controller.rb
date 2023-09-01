@@ -23,6 +23,15 @@ class ProfilesController < ApplicationController
         end
     end
 
+    def show
+        #urlのidをパラメーターで取得する
+        @user = User.find(params[:user_id]) 
+        @profile = @user.user_profile
+
+        puts @profile
+        render :show
+    end
+
     private
     def user_profiles_params
         params.require(:user_profile).permit(:name, :image, :introduction)
