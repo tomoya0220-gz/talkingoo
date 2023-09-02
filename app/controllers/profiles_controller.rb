@@ -24,12 +24,28 @@ class ProfilesController < ApplicationController
     end
 
     def show
-        #urlのidをパラメーターで取得する
-        @user = User.find(params[:user_id]) 
-        @profile = @user.user_profile
+        @user_profile = UserProfile.find_by(user_id: params[:user_id])
+    end
 
-        puts @profile
-        render :show
+    def follow
+        followed_id = params[:user_id]
+        follower_id = current_user.id
+        #Followモデルに空箱を与える
+        follow = Follow.new
+        follow.followed_id = followed_id
+        follow.follower_id = follower_id
+        if follow.save
+            redirect_to show_profile_path(followed_id), notice: 'フォローしました！'
+        else
+            render :show, status: :unprocessable_entity
+        end
+    end
+
+    #ログインユーザーがfollowテーブルにおいてfollower_idを持っている一つの列において、followed_idを削除するということ。
+    def destroy
+        followed_id = params[:user_id]
+        followed_id.destroy
+        redirect_to index_post_path, notice: '削除しました'
     end
 
     private

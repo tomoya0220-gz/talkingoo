@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   get 'profiles/show/:user_id',to: 'profiles#show', as: 'show_profile'
   #プロフィール詳細画面でのフォロー
   post 'profiles/show/:user_id',to: 'profiles#follow', as: 'follow_profile' 
-  
+  delete 'profiles/destroy/:id',to: 'profiles#destroy', as: 'destroy_profile'
+
   #通知
   get 'notifications/index',to: 'notifications#index', as: 'index_notifications'
   

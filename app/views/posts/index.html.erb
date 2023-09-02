@@ -9,7 +9,7 @@
   <% @posts.each do |post| %>
     
     <div>
-      <%= link_to post.user.user_profile.name,show_user_profile_path(post.user_id)%>
+      <%= link_to post.user.user_profile.name,show_profile_path(post.user_id)%>
     </div>
     <a class="post" href="">
       <div class="header">

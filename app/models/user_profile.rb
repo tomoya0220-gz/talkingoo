@@ -4,4 +4,7 @@ class UserProfile < ApplicationRecord
     validates:name,presence:true
 
     has_one_attached :image
+
+    belongs_to :follower
+    belongs_to :followed
 end
