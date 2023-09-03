@@ -23,33 +23,7 @@ class ProfilesController < ApplicationController
         end
     end
 
-    def show
-        @user = User.find(params[:user_id])
-        @user_profile = UserProfile.find_by(user_id: params[:user_id])
-        @follow = Follow.find(params[:user_id])
-        render :show
-    end
-
-    def follow
-        followed_id = params[:user_id]
-        follower_id = current_user.id
-        #Followモデルに空箱を与える
-        follow = Follow.new
-        follow.followed_id = followed_id
-        follow.follower_id = follower_id
-        if follow.save
-            redirect_to show_profile_path(followed_id), notice: 'フォローしました！'
-        else
-            render :show, status: :unprocessable_entity
-        end
-    end
-
-    def destroy
-        @follow = Follow.find(params[:id])
-        @follow.destroy
-        redirect_to index_post_path, notice: '削除しました'
-    end
-
+    
     private
     def user_profiles_params
         params.require(:user_profile).permit(:name, :image, :introduction)

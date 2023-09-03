@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   #プロフィール詳細画面へ
   get 'follows/show/:user_id',to: 'follows#show', as: 'show_follow'
   #プロフィール詳細画面でのフォロー
-  post 'follows/show/:user_id',to: 'follows#follow', as: 'follow_follow'
+  post 'follows/show/:user_id',to: 'follows#create', as: 'create_follow'
   #フォローを外す
   delete 'follows/destroy/:id',to: 'follows#destroy', as: 'destroy_follow'
 
