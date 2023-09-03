@@ -24,7 +24,10 @@ class ProfilesController < ApplicationController
     end
 
     def show
+        @user = User.find(params[:user_id])
         @user_profile = UserProfile.find_by(user_id: params[:user_id])
+        @follow = Follow.find(params[:user_id])
+        render :show
     end
 
     def follow
@@ -41,10 +44,9 @@ class ProfilesController < ApplicationController
         end
     end
 
-    #ログインユーザーがfollowテーブルにおいてfollower_idを持っている一つの列において、followed_idを削除するということ。
     def destroy
-        followed_id = params[:user_id]
-        followed_id.destroy
+        @follow = Follow.find(params[:id])
+        @follow.destroy
         redirect_to index_post_path, notice: '削除しました'
     end
 

@@ -9,10 +9,10 @@ class User < ApplicationRecord
   
     # フォローをした、されたの関係
   has_many :follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
-  has_many :reverse_of_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
+  has_many :followeds, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
 
   # 一覧画面で使う
-  has_many :following_user, through: :follower, source: :followed # 自分がフォローしている人
-  has_many :follower_user, through: :followed, source: :follower  # 自分をフォローしている人
+  has_many :following_user, through: :followers, source: :followed # 自分がフォローしている人
+  has_many :follower_user, through: :followeds, source: :follower  # 自分をフォローしている人
 
 end

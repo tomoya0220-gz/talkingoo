@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto post-form-container">
+            <h2 class="h2"><%= @user_profile.name %></h2>
+            <!-- user_profileテーブルのnameカラムを取り出してる-->
+            <% if current_user != @user_id %>
+                <% if @follow.present? %>
+                    <%= link_to "フォローを外す", destroy_follow_path(@following.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
+                <% else %>
+                    <%= link_to "フォローする", follow_follow_path(@user_profile.user_id), local: true, method: :post, class: "btn btn-success" %>
+                <% end %>
+            <% end %>                 
+        </div>
+    </div>
+</div>
