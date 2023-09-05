@@ -28,6 +28,6 @@ class FollowsController < ApplicationController
     def destroy
         @follow = Follow.find(params[:id])
         @follow.destroy
-        redirect_to show_follow_path(@follow.followedid), notice: 'フォローを外す。'
+        redirect_to show_follow_path(@follow.followed_id), notice: 'フォローを外す。'
     end
 end

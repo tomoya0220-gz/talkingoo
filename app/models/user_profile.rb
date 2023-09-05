@@ -5,6 +5,6 @@ class UserProfile < ApplicationRecord
 
     has_one_attached :image
 
-    belongs_to :follower, class_name: "User"
-    belongs_to :followed, class_name: "User"
+    # belongs_to :follower, class_name: "User"
+    # belongs_to :followed, class_name: "User"
 end

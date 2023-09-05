@@ -15,18 +15,12 @@ Rails.application.routes.draw do
   post 'profiles/new',to: 'profiles#create',as: 'create_profiles'
   
   #プロフィール詳細画面へ
-  get 'profiles/show/:user_id',to: 'profiles#show', as: 'show_profile'
-  #プロフィール詳細画面でのフォロー
-  post 'profiles/show/:user_id',to: 'profiles#follow', as: 'follow_profile' 
-  delete 'profiles/destroy/:id',to: 'profiles#destroy', as: 'destroy_profile'
-
-  #プロフィール詳細画面へ
   get 'follows/show/:user_id',to: 'follows#show', as: 'show_follow'
   #プロフィール詳細画面でのフォロー
   post 'follows/show/:user_id',to: 'follows#create', as: 'create_follow'
   #フォローを外す
   delete 'follows/destroy/:id',to: 'follows#destroy', as: 'destroy_follow'
-
+  
 
   #通知
   get 'notifications/index',to: 'notifications#index', as: 'index_notifications'
