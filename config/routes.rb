@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   get 'posts/show/:post_id/comments/new', to: 'comments#new', as: 'new_comment'
   post 'posts/show/:post_id/comments/new', to: 'comments#create', as: 'create_comment'
   #プロフィール登録・更新
-  get 'profiles/new',to: 'profiles#new', as: 'new_profiles'
-  post 'profiles/new',to: 'profiles#create',as: 'create_profiles'
+  get 'profiles/new',to: 'profiles#new', as: 'new_profile'
+  post 'profiles/new',to: 'profiles#create',as: 'create_profile'
   
   #プロフィール詳細画面へ
   get 'follows/show/:user_id',to: 'follows#show', as: 'show_follow'

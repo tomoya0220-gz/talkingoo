@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
     end
 
     def create 
-        @user_profile = UserProfile.new(user_profiles_params)
+        @user_profile = UserProfile.new(user_profile_params)
         @user = current_user
         @user_profile.user_id = @user.id
         if params[:user_profile][:image]
@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
 
     
     private
-    def user_profiles_params
+    def user_profile_params
         params.require(:user_profile).permit(:name, :image, :introduction)
     end
 end
