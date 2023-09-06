@@ -18,9 +18,7 @@ class FollowsController < ApplicationController
     def show
         @user_id = params[:user_id]
         @user_profile = UserProfile.find_by(user_id: params[:user_id])
-        @follow = Follow.find_by(followed_id: params[:user_id] ,follower_id: current_user.id)
-        #:user_idのプロフィールを表示させたい
-        
+        @follow = Follow.find_by(followed_id: params[:user_id] ,follower_id: current_user.id)        
         render :show
     end
 
