@@ -3,27 +3,20 @@
         <div class="col-md-8 mx-auto post-form-container">
             <h2 class="h2"><%= @user_profile.name %></h2>
             <!-- user_profileテーブルのnameカラムを取り出してる-->
-            <% if (current_user.id !=  @user_profile.id) %>
+            <% if current_user.id !=  @user_profile.id %>
                 <% if @follow.present? %>
                     <%= link_to "フォローを外す", destroy_follow_path(@follow.id), method: :delete, data: { confirm: '本当にフォローをはずしますか？' }, class: "btn btn-danger" %>
                 <% else %>
                     <%= link_to "フォローする", create_follow_path(@user_profile.user_id), local: true, method: :post, class: "btn btn-success" %>
                 <% end %>               
             <% end %>
-                <div class="form-group">
-                    <%= @user_profile.introduction %>
-                </div>
+            <div class="form-group">
+                <%= @user_profile.introduction %>
+            </div>
 
-                <div class="form-group image-upload">                    
-                    <%= image_tag(@user_profile.image, class: "img-fluid") if @user_profile.image.attached? %>
-                </div>
-            <%
-=begin%>
- <% else %>
-                <%= link_to create_profile_path(@user_profile), local: true, method: :post, class: "" %>
-            <% end %> 
-<%
-=end%>
+            <div class="form-group image-upload">                    
+                <%= image_tag(@user_profile.image, class: "img-fluid") if @user_profile.image.attached? %>
+            </div>
         </div>
     </div>
 </div>

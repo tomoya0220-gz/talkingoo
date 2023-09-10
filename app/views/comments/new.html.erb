@@ -5,18 +5,24 @@
             <p class="timestamp"><%= @post.created_at.strftime("%B %d, %Y") %></p>
         </div>
         <div class="body">
-            <p class="content"><%= @post.body %></p>
+            <p class="content"><%= @post.content%></p>
         </div>
         <div class="image">
             <%= image_tag(@post.image) if @post.image.attached? %>
+        </div>
+        <div class="">
+            <% if @favorite.post_id == params[:post_id] %>
+                <%= link_to destroy_favorite_path, method: :delete, class: "btn btn-danger" %>
+            <% else %>
+                <%link_to create_favorite_path, method: post, class: "btn btn-success" %>
+            <% end %>
         </div>
     </a>
 </div>
 
 <div class="comment-form-container">
     <div class="comment">
-        <%= form_with(url: create_comment_path(@post), model: @comment, local: true, method: :post) do |f| %>
-
+        <%= form_with(url: create_comment_path(@post), model: @comment, local: true, method: :post) do |f| %> 
             <% if @comment.errors.any? %>
                 <ul>
                     <% @comment.errors.full_messages.each do |message| %>
@@ -43,6 +49,7 @@
     <% @comments.each do |comment| %>
         <div class="comment">
             <div class="body">
+            <p class="name"><%= @user_profile.name %></p>
             <p class="content"><%= comment.content %></p>
             <p class="timestamp"><%= comment.created_at.strftime("%B %d, %Y") %></p>
             </div>

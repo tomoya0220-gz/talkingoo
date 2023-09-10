@@ -9,7 +9,7 @@ class FollowsController < ApplicationController
         follow.follower_id = follower_id
         if follow.save
             redirect_to show_follow_path(followed_id), notice: 'フォローしました！'
-        else
+        else    
             render :show, status: :unprocessable_entity
         end
     end
@@ -18,8 +18,12 @@ class FollowsController < ApplicationController
     def show
         @user_id = params[:user_id]
         @user_profile = UserProfile.find_by(user_id: params[:user_id])
-        @follow = Follow.find_by(followed_id: params[:user_id] ,follower_id: current_user.id)        
-        render :show
+        @follow = Follow.find_by(followed_id: params[:user_id] ,follower_id: current_user.id)
+        if current_user.id !=  @user_profile.id
+            render :show, status: :unprocessable_entity
+        else
+            redirect_to create_profile_path
+        end 
     end
 
     # フォロー外すとき

@@ -8,19 +8,26 @@ Rails.application.routes.draw do
   get 'posts/edit/:id', to: 'posts#edit', as: 'edit_post'
   post 'posts/edit/:id', to: 'posts#update', as: 'update_post'
   delete 'posts/destroy/:id', to: 'posts#destroy', as: 'destroy_post'
-  get 'posts/show/:post_id/comments/new', to: 'comments#new', as: 'new_comment'
+  #コメント
+  get 'posts/show/:post_id/comments/new',to: 'comments#new',as: 'new_comment'
   post 'posts/show/:post_id/comments/new', to: 'comments#create', as: 'create_comment'
+
+  #いいね
+  get '/:post_id/favorites/create',to: 'favorites#create',as: 'create_favorite'
+  delete '/destroy/:id',to: 'favorites#destroy', as: 'destroy_favorite'
+
   #プロフィール登録・更新
   get 'profiles/new',to: 'profiles#new', as: 'new_profile'
   post 'profiles/new',to: 'profiles#create',as: 'create_profile'
   
+
   #プロフィール詳細画面へ
   get 'follows/show/:user_id',to: 'follows#show', as: 'show_follow'
   #プロフィール詳細画面でのフォロー
   post 'follows/show/:user_id',to: 'follows#create', as: 'create_follow'
   #フォローを外す
   delete 'follows/destroy/:id',to: 'follows#destroy', as: 'destroy_follow'
-  
+    
 
   #通知
   get 'notifications/index',to: 'notifications#index', as: 'index_notifications'
