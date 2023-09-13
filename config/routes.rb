@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   post 'posts/show/:post_id/comments/new', to: 'comments#create', as: 'create_comment'
 
   #いいね
-  get '/:post_id/favorites/create',to: 'favorites#create',as: 'create_favorite'
-  delete '/destroy/:id',to: 'favorites#destroy', as: 'destroy_favorite'
+  post 'posts/:post_id/favorites/create',to: 'comments#favorite',as: 'create_favorite'
+  delete 'posts/:post_id/favorites/destroy',to: 'comments#destroy', as: 'destroy_favorite'
 
   #プロフィール登録・更新
   get 'profiles/new',to: 'profiles#new', as: 'new_profile'

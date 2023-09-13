@@ -11,6 +11,9 @@ class PostsController < ApplicationController
         else
             @posts = Post.all
         end
+        user_id = current_user.id
+        post_id = params[:post_id]
+        @favorite = Favorite.find_by(user_id: user_id, post_id: post_id)
         render :index
     end
 
@@ -111,8 +114,8 @@ class PostsController < ApplicationController
     #     @users = user.followers
     # end
     
-    # private
-    # def post_params
-    #     params.require(:post).permit(:title, :content, :category_id, :image)
-    # end
+    private
+    def post_params
+        params.require(:post).permit(:title, :content, :category_id, :image)
+    end
 end
