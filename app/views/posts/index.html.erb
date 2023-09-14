@@ -23,7 +23,7 @@
         <%= image_tag(post.image) if post.image.attached? %>
       </div>
       <div class="favorite">
-        <% if post.my_favorite(current_user) %>                
+        <% if post.favorites.size %>                
             <%= link_to "いいねを外す。", destroy_favorite_path(post_id: post.id), method: :delete, class: "btn btn-danger" %>
         <% else %>
             <%= link_to "いいね！", create_favorite_path(post_id: post.id), method: :post, class: "btn btn-success" %>
