@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    favorite = Favorite.find(params[:post_id])
+    favorite = Favorite.find_by(user_id: current_user.id, post_id: params[:post_id])
     favorite.destroy
     redirect_to index_post_path, notice: 'いいねを外しました。'
   end

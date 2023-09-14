@@ -7,12 +7,11 @@ class PostsController < ApplicationController
     def index
         @title = params[:title]
         if @title.present?
-            @posts = Post.eager_load(:favorites).where('title LIKE ?' = "#{@title}")
+            @posts = Post.eager_load(:favorites).where("title LIKE ? = #{@title}")
         else
-            @posts = Post.eager_load(:favorites).where("favorites.user_id = #{current_user.id}").all
+            @posts = Post.all
+            # @posts = Post.eager_load(:favorites).where("favorites.user_id = #{current_user.id}").all
         end
-        user_id = current_user.id
-        post_id = params[:post_id]
         render :index
     end
 
