@@ -8,7 +8,6 @@ class FavoritesController < ApplicationController
             redirect_to index_post_path, notice: 'いいねしました！'
         else
             redirect_to index_post_path, notice: 'いいねできませんでした。'
-            # redirect_to request.referer
         end
         render template:"comment/new"
     end

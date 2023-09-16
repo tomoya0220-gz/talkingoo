@@ -4,8 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one :user_profile
-  has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
-  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   
   # フォローをした、されたの関係
   has_many :follower, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
@@ -13,4 +11,7 @@ class User < ApplicationRecord
 
   #いいね
   has_many :favorites, dependent: :destroy
+
+  #通知
+  has_many :notifications, dependent: :destroy
 end

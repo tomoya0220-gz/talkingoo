@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   #プロフィール登録・更新
   get 'profiles/new',to: 'profiles#new', as: 'new_profile'
   post 'profiles/new',to: 'profiles#create',as: 'create_profile'
-  
+
+  #通知機能
+  post 'notifications/create',to: 'notifications#create',as: 'create_notification'
 
   #プロフィール詳細画面へ
   get 'follows/show/:user_id',to: 'follows#show', as: 'show_follow'

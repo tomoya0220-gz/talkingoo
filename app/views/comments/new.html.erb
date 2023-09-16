@@ -11,15 +11,11 @@
             <%= image_tag(@post.image) if @post.image.attached? %>
         </div>
         <div class="favorite">
-            <% if @favorite.present? %>                
-                <%= form_with url: destroy_favorite_path, class: "form", method: :delete, local: true do |form| %>
-                    <button type="submit" class="btn btn-danger"> いいねを外す。</button>
-                <% end %>
+            <% if @post.favorited?(current_user) %>                
+                <%= link_to "いいねを外す。", destroy_favorite_path(post_id: @post.id), method: :delete, class: "btn btn-danger" %>
             <% else %>
-                <%= form_with url: create_favorite_path, class: "form", method: :post, local: true do |form| %>
-                    <button type="submit" class="btn btn-success"> いいね!</button>
-                <% end %>
-            <% end %>            
+                <%= link_to "いいね！", create_favorite_path(post_id: @post.id), method: :post, class: "btn btn-success" %>
+            <% end %>             
         </div>
     </a>
 </div>

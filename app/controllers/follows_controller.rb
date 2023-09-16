@@ -12,6 +12,7 @@ class FollowsController < ApplicationController
         else    
             render :show, status: :unprocessable_entity
         end
+
     end
 
     #プロフィール詳細画面へ
@@ -32,4 +33,5 @@ class FollowsController < ApplicationController
         @follow.destroy
         redirect_to show_follow_path(@follow.followed_id), notice: 'フォローを外す。'
     end
+
 end

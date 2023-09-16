@@ -1,8 +1,14 @@
 class Notification < ApplicationRecord
-    default_scope->{order(created_at: :desc)}
+  belongs_to :notifiable, polymorphic: true
+  belongs_to :user
 
-    belongs_to :post, optional: true
-    belongs_to :comment, optional: true
-    belongs_to :visiter, class_name: 'User', foreign_key: 'visiter_id', optional: true
-    belongs_to :visited, class_name: 'User', foreign_key: 'visited_id', optional: true
+  enum read: { unread: false, read: true }
+  scope :recent, ->(count) { order(created_at: :desc).limit(count)}
+
+  enum notifiable_type: {
+    favorited_the_post:      0,
+    followed_you:             1,
+    commented_on_the_post:   2
+  }
+
 end
