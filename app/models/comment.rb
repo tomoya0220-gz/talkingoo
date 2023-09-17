@@ -1,5 +1,6 @@
 class Comment < ApplicationRecord
   belongs_to :post
+  belongs_to :user
 
   validates:content, presence: true, length: { maximum: 100 }
 
@@ -8,7 +9,7 @@ class Comment < ApplicationRecord
   after_create_commit :create_notifications
 
   private
-  def create_notifications
-    Notification.create(notifiable: self, user_id: post.user_id, notifiable_type: Notification.notifiable_types[:commented_on_the_post])
-  end
+    def create_notifications
+        Notification.create(notifiable: self, user_id: user_id)
+    end
 end

@@ -15,6 +15,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
+    @comment.user_id = current_user.id
     if @comment.save
       redirect_to new_comment_path(params[:post_id]), notice: 'コメントしました'
     else
@@ -23,8 +24,7 @@ class CommentsController < ApplicationController
       render :new, status: :unprocessable_entity
       @user = current_user
       @user_profile = @user.user_profile
-    end
-    after_create_commit :create_notifications    
+    end    
   end
 
   def favorite

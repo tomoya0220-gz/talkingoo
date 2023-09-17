@@ -8,6 +8,6 @@ class Follow < ApplicationRecord
 
     private
     def create_notifications
-        Notification.create(notifiable: self, user_id: follow.follower_id, notifiable_type: Notification.notifiable_types[:followed_you])
+        Notification.create(notifiable: self, user_id: followed_id)
     end
 end

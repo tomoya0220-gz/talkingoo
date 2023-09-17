@@ -8,6 +8,6 @@ class Favorite < ApplicationRecord
 
     private
     def create_notifications
-        Notification.create(notifiable: self, notifiable_type: Notification.notifiable_types[:favorited_the_post])
+        Notification.create(notifiable: self, user_id: user_id)
     end
 end
