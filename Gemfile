@@ -55,6 +55,8 @@ gem 'dotenv-rails'
 
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
+gem 'font-awesome-sass'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

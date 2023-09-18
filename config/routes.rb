@@ -20,30 +20,20 @@ Rails.application.routes.draw do
   get 'profiles/new',to: 'profiles#new', as: 'new_profile'
   post 'profiles/new',to: 'profiles#create',as: 'create_profile'
 
-  #通知機能
-  get 'notifications/index',to: 'notifications#index',as: 'index_notifications'
-
   #プロフィール詳細画面へ
   get 'follows/show/:user_id',to: 'follows#show', as: 'show_follow'
   #プロフィール詳細画面でのフォロー
   post 'follows/show/:user_id',to: 'follows#create', as: 'create_follow'
   #フォローを外す
   delete 'follows/destroy/:id',to: 'follows#destroy', as: 'destroy_follow'
-    
 
-  #通知
-  get 'notifications/index',to: 'notifications#index', as: 'index_notifications'
-  
-  
-  
+  #通知機能
+  get 'notifications/index',to: 'notifications#index',as: 'index_notification'
+  #更新
+  get 'notifications/update',to: 'notifications#update',as: 'update_notification'
   #削除
-  delete 'notifications/destroy', to: 'notifications#destroy_all', as: 'destroy_all_users_notifications'
-  
+  delete 'notifications/destroy', to: 'notifications#destroy_read', as: 'destroy_notification'
 
-  #TopicsController
-  get 'topics/new', to: 'topics#new', as:'new_topics'
-  get 'topics/edit', to: 'topics#edit', as:'edit_topics'
-  
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
