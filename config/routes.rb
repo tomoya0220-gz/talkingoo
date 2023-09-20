@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   #通知機能
   patch 'notifications/index',to: 'notifications#index',as: 'index_notification'
   #更新
-  get 'notifications/update',to: 'notifications#update',as: 'update_notification'
+  post 'notifications/update',to: 'notifications#update',as: 'update_notification'
   #削除
   delete 'notifications/destroy', to: 'notifications#destroy_read', as: 'destroy_notification'
 

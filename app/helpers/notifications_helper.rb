@@ -4,12 +4,11 @@ module NotificationsHelper
 	
         case notification.notifiable_type
         when 'Favorite'
-            "#{notification.user_id.name} が <strong><#{t("notification.notifiable_type.#{notification.notifiable_type.Favorite}")}></strong> - <strong>#{notifiable_name(notification)}</strong> にいいね！しました".html_safe
+            "#{notification.user_id.name} が <strong>#{t("notification.notifiable_type.Favorite")}</strong> - <strong>#{notifiable_name(notification)}</strong> にいいね！しました".html_safe
         when 'Follow'
-            "#{notification.user_id.name} が <strong><#{t("notification.notifiable_type.#{notification.notifiable_type.Follow}")}></strong> - <strong>#{notifiable_name(notification)}</strong> にいいね！しました".html_safe
+            "#{notification.user_id.name} が <strong>#{t("notification.notifiable_type.Follow")}</strong> - <strong>#{notifiable_name(notification)}</strong> にいいね！しました".html_safe
         when 'Comment'
-            "#{notification.user_id.name} が <strong>#{t("notification.notifiable_type.#{notification.notifiable_type.Comment}")}</strong> - <strong>#{notifiable_name(notification)}</strong> にコメントしました".html_safe
-        
+            "#{notification.user_id.name} が <strong>#{t("notification.notifiable_type.Comment")}</strong> - <strong>#{notifiable_name(notification)}</strong> にコメントしました".html_safe
         else
             '新規通知がありました'
         end

@@ -16,7 +16,7 @@ class NotificationsController < ApplicationController
     end
 
     def update
-        @notification = current_user.user_id.find(params[:id])
+        @notifications = current_user.user_id.find(params[:id])
         if @notification.read?
             @notification.update(unread: false)
             respond_to do |format|
