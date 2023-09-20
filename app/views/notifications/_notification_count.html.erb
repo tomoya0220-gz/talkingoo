@@ -1,7 +1,10 @@
 <%= turbo_frame_tag 'notification_count' do %>
-    <% if current_user.notifications.read.present? %>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            <%= current_user.notifications.unread.size %>
-        </span>
+    <% if current_user.present? %>
+        <% unread_notifications = current_user.notifications.where(read: false) %>
+        <% if unread_notifications.any? %>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <%= unread_notifications.size %>
+            </span>
+        <% end %>
     <% end %>
 <% end %>

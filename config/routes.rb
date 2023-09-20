@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   delete 'follows/destroy/:id',to: 'follows#destroy', as: 'destroy_follow'
 
   #通知機能
-  get 'notifications/index',to: 'notifications#index',as: 'index_notification'
+  patch 'notifications/index',to: 'notifications#index',as: 'index_notification'
   #更新
   get 'notifications/update',to: 'notifications#update',as: 'update_notification'
   #削除

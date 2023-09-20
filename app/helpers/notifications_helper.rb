@@ -20,19 +20,19 @@ module NotificationsHelper
     def notifiable_name(notification)
         return unless notification && notification.notifiable
 	
-        # case notification.notifiable_type
-        # when 'Favorite'
-        #     if notification.notifiable.likeable_type == 'Comment'
-        #         "#{notification.notifiable.likeable.body}"
-        #     else
-        #         "#{notification.notifiable.likeable.title}"  
-        #     end
-        # when 'Comment'
-        #     "#{notification.notifiable.commentable.title}"
-        # when 'Follow'
-        #     "#{}"
-        # else
-        #     '新規通知がありました'
-        # end
+        case notification.notifiable_type
+        when 'Favorite'
+            if notification.notifiable.likeable_type == 'Comment'
+                "#{notification.notifiable.likeable.body}"
+            else
+                "#{notification.notifiable.likeable.title}"  
+            end
+        when 'Comment'
+            "#{notification.notifiable.commentable.title}"
+        when 'Follow'
+            "#{}"
+        else
+            '新規通知がありました'
+        end
     end
 end

@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(notification) do %>
-    <li data-notification-id="<%= notification.id %>" class="<%= notification.unread ? 'unread' : '' %> dropdown-item">
-        <%= link_to notification_path(notification), 
+    <li data-notification-id="<%= notification.id %>" class="<%= notification.unread? ? 'unread' : '' %> dropdown-item">
+        <%= link_to index_notification_path(notification), 
         method: :patch, 
         data: { turbo_method: :patch } do %>
             <%= icon 'fas', 'check' %>
