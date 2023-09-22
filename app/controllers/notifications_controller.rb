@@ -17,7 +17,7 @@ class NotificationsController < ApplicationController
     end
 
     def update
-        @notification = current_user.received_notifications.find(params[:id])
+        @notifications = current_user.received_notifications.find(params[:id])
         # @notifications = current_user.user_id.find(params[:id])
         # unread_notifications = current_user.notifications.where(read: false)
         @notification.update(unread: false)
@@ -43,7 +43,7 @@ class NotificationsController < ApplicationController
     end
 
     def mark_all_as_read
-        @notifications = current_user.received_notifications.unread(unread: true)
+        @notifications = current_user.received_notifications.unread
         # @notifications = current_user.user_id.find(params[:id])
         @notifications.destroy_all
         respond_to do |format|
