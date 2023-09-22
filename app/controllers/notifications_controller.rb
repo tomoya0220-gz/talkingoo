@@ -1,24 +1,27 @@
 class NotificationsController < ApplicationController
-    before_action :authenticate_user
+    before_action :authenticate_user!
     
     def index
-        @notifications = current_user.user_id.order(created_at: :desc).page(params[:page]).per(20)
-
+        @notifications = current_user.received_notifications.unread.order(created_at: :desc)
+        # @notifications = current_user.user_id.order(created_at: :desc).page(params[:page]).per(20)
         respond_to do |format|
             format.turbo_stream do
                 render turbo_stream: [
                     turbo_stream.append('notifications', partial: 'notifications/notification', collection: @notifications, as: :notification ),
                     turbo_stream.replace('notification_count', partial: 'notifications/notification_count', locals: { notifications: @notifications })
-                ]
+            ]
             end
             format.html
         end
+        render :index
     end
 
     def update
-        @notifications = current_user.user_id.find(params[:id])
-        if @notification.read?
-            @notification.update(unread: false)
+        @notification = current_user.received_notifications.find(params[:id])
+        # @notifications = current_user.user_id.find(params[:id])
+        # unread_notifications = current_user.notifications.where(read: false)
+        @notification.update(unread: false)
+        if @notification 
             respond_to do |format|
                 format.turbo_stream do
                     render turbo_stream: [
@@ -39,8 +42,9 @@ class NotificationsController < ApplicationController
         end
     end
 
-    def destroy_read
-        @notifications = current_user.user_id.unread
+    def mark_all_as_read
+        @notifications = current_user.received_notifications.unread(unread: true)
+        # @notifications = current_user.user_id.find(params[:id])
         @notifications.destroy_all
         respond_to do |format|
             format.turbo_stream do

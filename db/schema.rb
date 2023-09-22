@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_17_061040) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_22_021248) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_bin", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -70,14 +70,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_061040) do
   end
 
   create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_bin", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "recipient_id", null: false
     t.string "notifiable_type", null: false
     t.bigint "notifiable_id", null: false
-    t.bigint "user_id", null: false
-    t.boolean "read", default: false, null: false
+    t.boolean "unread", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
-    t.index ["user_id"], name: "index_notifications_on_user_id"
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
+    t.index ["sender_id"], name: "index_notifications_on_sender_id"
   end
 
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_bin", force: :cascade do |t|
@@ -116,7 +118,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_061040) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
-  add_foreign_key "notifications", "users"
+  add_foreign_key "notifications", "users", column: "recipient_id"
+  add_foreign_key "notifications", "users", column: "sender_id"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
   add_foreign_key "user_profiles", "users"

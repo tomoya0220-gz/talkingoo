@@ -13,5 +13,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   #通知
-  has_many :notifications, dependent: :destroy
+  has_many :sent_notifications, class_name: 'Notification', foreign_key: 'sender_id', dependent: :destroy
+  has_many :received_notifications, class_name: 'Notification', foreign_key: 'recipient_id', dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
 end

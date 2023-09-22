@@ -6,10 +6,19 @@ class Comment < ApplicationRecord
 
   has_one :notification, as: :notifiable, dependent: :destroy
 
-  after_create_commit :create_notifications
+  after_create_commit :create_comment_notification
 
   private
-    def create_notifications
-        Notification.create(notifiable: self, user_id: user_id)
-    end
+  def create_comment_notification
+    # if self.user_id != self.post.user_id
+    Notification.create(
+      sender_id: self.user_id,
+      recipient_id: self.post.user_id,
+      notifiable: self,
+      notifiable_id: self.id,
+      unread: true,               
+    )
+  # end
+      # Notification.create(notifiable: self, user_id: user_id)
+  end
 end

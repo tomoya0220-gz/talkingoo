@@ -1,0 +1,9 @@
+<li class="nav-item mt-3 me-3">
+    <div class="dropdown">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= icon 'far', 'bell' %>
+            <%= render 'notifications/notification_count' %>
+        </button>
+        <%= render 'shared/notifications_dropdown' %>
+    </div>
+</li>

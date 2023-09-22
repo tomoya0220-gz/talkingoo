@@ -3,10 +3,10 @@
     <li><hr class="dropdown-divider"></li>
     <%= turbo_frame_tag 'notifications' do %>
         <% if @notifications.present? %>
-            <%= link_to '全てを既読する', destroy_notification_path,
+            <%= link_to '全てを既読する', mark_all_as_read_notification_path,
             class: 'btn btn-outline-dark btn-sm mx-auto',
             method: :delete,
-            remote: true,
+            remote: :true,
             data: {turbo_method: :delete } %>           
             <% @notifications.each do |notification| %>
                 <%= render 'notifications/notification', { notification: notification } %>

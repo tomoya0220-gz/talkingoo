@@ -1,0 +1,10 @@
+<div class="notification-list">
+    <% @notifications.each do |notification| %>
+        <a class="notification" href="">
+            <div class="header">
+                <h2 class="title"><%= notification.notifiable_type %></h2>
+                <p class="timestamp"><%= notification.created_at.strftime("%B %d, %Y") %></p>
+            </div>
+        </a>
+    <% end %>
+</div>

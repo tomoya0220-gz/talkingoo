@@ -1,14 +1,7 @@
 class Notification < ApplicationRecord
+  belongs_to :sender, class_name: 'User', foreign_key: 'sender_id'
+  belongs_to :recipient, class_name: 'User', foreign_key: 'recipient_id'
   belongs_to :notifiable, polymorphic: true
-  belongs_to :user
-
-  def unread?
-    !read
-  end
-
-  enum notifiable_type: {
-    'Favorite' => 0,          
-    'Follow' => 1,
-    'Comment' => 2
-  }
+  
+  scope :unread, -> { where(unread: true) }
 end
