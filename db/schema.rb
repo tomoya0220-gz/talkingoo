@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_22_021248) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_25_060719) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_bin", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -93,6 +93,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_22_021248) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "reports", charset: "utf8mb4", collation: "utf8mb4_0900_bin", force: :cascade do |t|
+    t.bigint "reporter_id", null: false
+    t.bigint "reported_id", null: false
+    t.string "context_type", null: false
+    t.bigint "context_id", null: false
+    t.string "reason", comment: "通報理由"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["context_type", "context_id"], name: "index_reports_on_context"
+    t.index ["reported_id"], name: "index_reports_on_reported_id"
+    t.index ["reporter_id"], name: "index_reports_on_reporter_id"
+  end
+
   create_table "user_profiles", charset: "utf8mb4", collation: "utf8mb4_0900_bin", force: :cascade do |t|
     t.string "name", comment: "名前/ニックネーム"
     t.bigint "user_id", null: false
@@ -122,5 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_22_021248) do
   add_foreign_key "notifications", "users", column: "sender_id"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
+  add_foreign_key "reports", "users", column: "reported_id"
+  add_foreign_key "reports", "users", column: "reporter_id"
   add_foreign_key "user_profiles", "users"
 end

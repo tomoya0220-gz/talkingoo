@@ -7,10 +7,13 @@ class ApplicationController < ActionController::Base
     private    
     def set_notification_object
         
-        # if current_user
+        
         # @notifications = current_user.received_notifications.unread.order(created_at: :desc) 
         # end
         @notifications = []
-        @notifications = Notification.where(recipient_id: current_user.id).order(:unread).order(created_at: :desc)
+        if current_user            
+            @notifications = Notification.where(recipient_id: current_user.id).order(:unread).order(created_at: :desc)
+
+        end
     end
 end

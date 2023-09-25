@@ -16,4 +16,9 @@ class User < ApplicationRecord
   has_many :sent_notifications, class_name: 'Notification', foreign_key: 'sender_id', dependent: :destroy
   has_many :received_notifications, class_name: 'Notification', foreign_key: 'recipient_id', dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :destroy
+
+  #通報
+  has_many :reporters, class_name: 'Report', foreign_key: 'reporter_id'
+  has_many :reporteds, class_name: 'Report', foreign_key: 'reported_id'
+  has_many :reports, as: :context
 end

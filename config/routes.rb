@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   #削除
   delete 'notifications/mark_all_as_read', to: 'notifications#mark_all_as_read', as: 'mark_all_as_read_notification'
 
+  #通報機能
+  post 'posts/:post_id/reports/create',to: 'reports#create',as: 'create_post_report'
+  post 'comments/:comment_id/reports/create',to: 'reports#create',as: 'create_comment_report'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -4,6 +4,8 @@ class Comment < ApplicationRecord
 
   validates:content, presence: true, length: { maximum: 100 }
 
+  has_many :reports, as: :context
+
   has_one :notification, as: :notifiable, dependent: :destroy
 
   after_create_commit :create_comment_notification

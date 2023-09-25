@@ -42,6 +42,9 @@
                 </div>
             </div>
         <% end %>
+        <% if @user != current_user %> 
+            <%= link_to "ユーザーを通報", (@post ? create_post_report_path(@post) : create_comment_report_path(@comment)), class: "btn btn-danger" %>
+        <% end %>
     </div>
 </div>
 
