@@ -5,14 +5,14 @@ class ReportsController < ApplicationController
         @report = Report.new(report_params)
         @report.reporter_id = current_user.id
         if context == Post
-            @post = Post.params[:post_id]
-            @user = @post.user_id
-            @report.reported_id =  @user.id
+            @post = Post.find(params[:post_id])
+            @report_user = @post.user
+            @report.reported_id =  @reported_user.id
         else #if context == Comment
-            @comment = Comment.params[:comment_id]
-            @post = @comment.post_id
-            @user = @post.user_id
-            @report.reported_id =  @user.id
+            @comment = Comment.find(params[:comment_id])
+            @comment = @comment.comment
+            @reported_user = @comment.user
+            @report.reported_id =  @ureport_user.id
         end
 
         if @report.save

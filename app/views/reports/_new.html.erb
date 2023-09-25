@@ -1,0 +1,8 @@
+<h3>通報</h3>
+<%= form_with(url: (@post ? create_post_report_path(@post) : create_comment_report_path(@comment)), local: true, method: :post) do |f| %>
+    <div class="form-group">
+        <%= f.text_area :reason, class:"form-control" %>
+        <%= f.text_field :url, class:"form-control" %>
+        <%= f.submit "報告する", class: "btn btn-danger" %>
+    </div>
+<% end %>

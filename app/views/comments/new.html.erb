@@ -41,11 +41,15 @@
                     <%= f.submit '送信', class: 'btn btn-primary' %>
                 </div>
             </div>
-        <% end %>
-        <% if @user != current_user %> 
-            <%= link_to "ユーザーを通報", (@post ? create_post_report_path(@post) : create_comment_report_path(@comment)), class: "btn btn-danger" %>
-        <% end %>
+        <% end %>        
     </div>
+    <% if @reported_user != current_user.id %>
+        <div class="button-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle">
+                <%= render 'reports/new' %>
+            </button>        
+        </div>
+    <% end %>
 </div>
 
 <div class="comment-list">
@@ -57,5 +61,5 @@
             <p class="timestamp"><%= comment.created_at.strftime("%B %d, %Y") %></p>
             </div>
         </div>
-    <% end %>
+    <% end %>    
 </div>
