@@ -10,17 +10,8 @@ class CommentsController < ApplicationController
     user_id = current_user.id
     post_id = params[:post_id]
     @favorite = Favorite.new(user_id: user_id, post_id: post_id)
+    @reported_user = @post.user
     render :new
-    if @comment.save
-      @reported_user = @comment.user_id
-      redirect_to index_post_path
-      return
-    else
-      # flash[:error] = "コメントの保存に失敗しました。"
-      redirect_to index_post_path
-      return
-    end
-    
   end
 
   def create

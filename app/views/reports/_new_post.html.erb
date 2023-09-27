@@ -1,0 +1,12 @@
+<h3>通報</h3>
+<%= form_with(url: create_post_report_path(post_id), local: true, method: :post) do |f| %>
+    <%= f.hidden_field :context  %>
+    <input name="context" value="Post" type="hidden">
+    <div class="form-group">
+        <%= f.label :reason %>
+        <%= f.text_area :reason, class:"form-control" %>
+    </div>
+    <div class="button-group">
+        <%= f.submit "報告する", class: "btn btn-danger" %>
+    </div>
+<% end %>

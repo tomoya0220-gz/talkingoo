@@ -29,6 +29,18 @@
             <%= link_to "いいね！", create_favorite_path(post_id: post.id), method: :post, class: "btn btn-success" %>
         <% end %>            
       </div>
+      <% if @reported_user != current_user.id %>
+        <div class="button-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle">
+                <%= render 'reports/new_post', post_id: post.id %>
+            </button>        
+        </div>
+      <% end %>
     </a>
   <% end %>
+  <footer>
+    <% if current_user.try(:admin?) %>
+      <%= link_to '管理者ログイン', rails_admin_path %>
+    <% end %>
+  </footer>
 </div>

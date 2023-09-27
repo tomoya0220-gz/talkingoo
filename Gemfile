@@ -56,7 +56,11 @@ gem 'dotenv-rails'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'font-awesome-sass'
-
+gem 'cancancan'
+gem 'rails_admin'
+gem 'cssbundling-rails'
+gem 'sassc-rails'
+gem 'enum-help'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -81,3 +85,4 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+

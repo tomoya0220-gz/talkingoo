@@ -8,7 +8,8 @@
     "watch": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "prod": "npm run production",
-    "production": "mix --production"
+    "production": "mix --production",
+    "build:css": "sass ./app/assets/stylesheets/rails_admin.scss:./app/assets/builds/rails_admin.css --no-source-map --load-path=node_modules"
   },
   "dependencies": {
     "@hotwired/turbo-rails": "^7.3.0",
@@ -25,7 +26,8 @@
     "sass-loader": "^10.1.1",
     "ts-loader": "^9.4.2",
     "turbolinks": "^5.2.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "rails_admin": "3.1.2"
   },
   "devDependencies": {
     "resolve-url-loader": "^5.0.0"

@@ -43,22 +43,23 @@
             </div>
         <% end %>        
     </div>
-    <% if @reported_user != current_user.id %>
-        <div class="button-group">
-            <button type="button" class="btn btn-secondary dropdown-toggle">
-                <%= render 'reports/new' %>
-            </button>        
-        </div>
-    <% end %>
+    
 </div>
 
 <div class="comment-list">
     <% @comments.each do |comment| %>
         <div class="comment">
             <div class="body">
-            <p class="name"><%= @user_profile.name %></p>
-            <p class="content"><%= comment.content %></p>
-            <p class="timestamp"><%= comment.created_at.strftime("%B %d, %Y") %></p>
+                <p class="name"><%= @user_profile.name %></p>
+                <p class="content"><%= comment.content %></p>
+                <p class="timestamp"><%= comment.created_at.strftime("%B %d, %Y") %></p>
+                <% if @reported_user != current_user.id %>
+                    <p class="button-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle">
+                            <%= render 'reports/new_comment', comment_id: comment.id %>
+                        </button>        
+                    </p>
+                <% end %>
             </div>
         </div>
     <% end %>    
